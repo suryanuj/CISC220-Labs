@@ -17,7 +17,7 @@ class Player {
 	string name;
   	char piece;
 
-  	void construct(){
+  	void construct1(){
   		name="computer";
   		piece='O';
     }
