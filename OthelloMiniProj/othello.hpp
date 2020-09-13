@@ -13,19 +13,16 @@
 using namespace std;
 
 class Player {
-  public:
-	string name;
-  	char piece;
 
-  	void construct1(){
-  		name="computer";
-  		piece='O';
-    }
+	public:
+		string name;
+		char piece;
 
-    void construct2(string name1, char piece1){
-    	name=name1;
-    	piece=piece1;
-    }
+		Player ();
+		Player (string name1, char piece1);
 };
+
+
+
 
 #endif /* OTHELLO_HPP_ */

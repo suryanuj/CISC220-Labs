@@ -9,6 +9,23 @@
 
 //playGame Method:
 
+othello::Player (){
+
+	name="computer";
+	piece='O';
+}
+
+
+othello::Player (string name1, char piece1){
+
+	name=name1;
+	piece=piece1;
+}
+
+
+
+
+
 void Othello::playGame(){
 	 makemat();
 	 printmat();
