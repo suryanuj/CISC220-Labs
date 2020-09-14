@@ -36,6 +36,7 @@ void makemat()
 	        matrix[i][j]='_';
 	      }
 	}
+
 	matrix[4][5]='O';
     matrix[4][4]='B';
     matrix[5][5]='B';
@@ -48,27 +49,25 @@ void makemat()
 
 void printmat()
 {
-
-
 	string charString="-01234567";
+	for(int i=0; i<9; i++){
+		matrix[0][i]=charString[i];
+	}
 
-	  for(int i=0; i<9; i++){
-	    matrix[0][i]=charString[i];
-	  }
+	for(int i=1; i<9; i++){
+		matrix[i][0]=charString[i];
+	}
 
-	  for(int i=1; i<9; i++){
-	    matrix[i][0]=charString[i];
-	  }
-
-	  int counter=0;
-	  for(int i=0; i<8; i++) {
-	    for(int j=0; j<8; j++) {
-	 				cout << matrix[i][j]<<"\t";
+	int counter=0;
+	for(int i=0; i<8; i++) {
+		for(int j=0; j<8; j++) {
+			cout << matrix[i][j]<<"\t";
 	    		counter++;
 	      	if(counter%8==0){
 	          cout << endl;
 	 		}
 	  }
+	}
 }
 
 #endif /* OTHELLO_HPP_ */
