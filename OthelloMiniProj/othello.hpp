@@ -10,13 +10,15 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
+#include "player.cpp"
 using namespace std;
 
 class Othello {
-	string st1;
-	char c;
-	string st2;
-	char c2;
+	char board[][];
+	int boardSize = 8;
+	Player player1;
+	Player player2;
+	int numPlayers;
 
 	public:
 		Othello();
@@ -25,26 +27,48 @@ class Othello {
 
 };
 
-char makemat()
+void makemat()
 {
-	char matrix[8][8];
+	char matrix[9][9];
 
-	for(int i=0;i<8;i++){
-	      for(int j=0;j<8;j++){
+	for(int i=1;i<9;i++){
+	      for(int j=1;j<9;j++){
 	        matrix[i][j]='_';
 	      }
-	matrix[3][4]='O';
-    matrix[3][3]='B';
+	}
+	matrix[4][5]='O';
     matrix[4][4]='B';
-    matrix[4][3]='O';
+    matrix[5][5]='B';
+    matrix[5][4]='O';
 
     //cout << matrix <<endl;
-    return matrix;
-};
+    //return matrix;
+
+}
 
 void printmat()
 {
-	cout << matrix <<endl;
+
+
+	string charString="-01234567";
+
+	  for(int i=0; i<9; i++){
+	    matrix[0][i]=charString[i];
+	  }
+
+	  for(int i=1; i<9; i++){
+	    matrix[i][0]=charString[i];
+	  }
+
+	  int counter=0;
+	  for(int i=0; i<8; i++) {
+	    for(int j=0; j<8; j++) {
+	 				cout << matrix[i][j]<<"\t";
+	    		counter++;
+	      	if(counter%8==0){
+	          cout << endl;
+	 		}
+	  }
 }
 
 #endif /* OTHELLO_HPP_ */

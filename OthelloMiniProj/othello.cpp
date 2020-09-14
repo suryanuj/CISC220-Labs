@@ -11,7 +11,7 @@
 void Othello::playGame(){
 	 makemat();
 	 printmat();
-	 bool play = true;
+	 /*bool play = true;
 	 int fullsqrs = 0;
 	 player p = p1;
 	 bool whichp = true;
@@ -45,11 +45,11 @@ void Othello::playGame(){
 			whichp = true;
 		}
 
-		fullsqrs+=1;
+		fullsqrs+=1;*/
 	}
-	ckwin();
+	//ckwin();
 
-}
+//}
 /* *************************************************************************
 and code for the main function, which should be in its own file with a .cpp
 extension, located in the same project folder as your Othello Class and your Player
