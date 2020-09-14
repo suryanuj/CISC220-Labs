@@ -5,7 +5,7 @@
 *      Author: Suryanuj G.
 *      Partner: Nicholas P.
  */
-
+#include "othello.hpp"
 
 //playGame Method:
 void Othello::playGame(){

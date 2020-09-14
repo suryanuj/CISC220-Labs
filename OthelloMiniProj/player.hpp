@@ -16,8 +16,6 @@ class Player {
 	string name;
 	char piece;
 
-
-
 	public:
 		Player ();
 		Player (string name1, char piece1);

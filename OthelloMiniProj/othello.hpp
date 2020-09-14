@@ -12,5 +12,18 @@
 #include <string.h>
 using namespace std;
 
+class Othello {
+	string st1;
+	char c;
+	string st2;
+	char c2;
+
+	public:
+		Othello();
+		Othello(string st1, char c);
+		Othello(string st1, char c, string st2, char c2);
+
+};
+
 
 #endif /* OTHELLO_HPP_ */
