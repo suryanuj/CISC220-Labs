@@ -9,6 +9,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include "Othello.hpp"
+#include "player.hpp"
 #include <time.h>
 using namespace std;
 
@@ -19,13 +20,6 @@ int main() {
 	7
 	Othello game3;
 	game.playGame();
-}/*
- * main.cpp
- *
- *  Created on: Sep 13, 2020
- *      Author: suryanuj
- */
-
-
+}
 
 
