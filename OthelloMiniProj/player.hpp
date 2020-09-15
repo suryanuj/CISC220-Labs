@@ -19,6 +19,10 @@ class Player {
 	public:
 		Player ();
 		Player (string name1, char piece1);
+
+		// Setter
+		void setPiece(char s);
+
 };
 
 

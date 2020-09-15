@@ -17,7 +17,6 @@ int main() {
 	srand(time(NULL));
 	Othello game("b1",'B',"s1",'O');
 	Othello game2("b1",'B');
-	7
 	Othello game3;
 	game.playGame();
 }

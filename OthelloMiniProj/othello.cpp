@@ -8,6 +8,32 @@
 #include "othello.hpp"
 
 //playGame Method:
+
+
+Othello::Othello(){
+	player1();
+	player2();
+	player2.setPiece('B');
+	numPlayers=0;
+}
+
+Othello::Othello(string st1, char c){
+	player1(st1,c);
+	player2();
+	numPlayers=1;
+}
+
+Othello::Othello(string st1, char c, string st2, char c2){
+	player1(st1,c);
+	player2(st2,c);
+	numPlayers=2;
+}
+
+
+
+
+
+
 void Othello::playGame(){
 	 makemat();
 	 printmat();

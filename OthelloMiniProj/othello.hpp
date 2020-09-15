@@ -72,6 +72,33 @@ class Othello {
 		}
 	}
 
+
+	void placepiece(string player, char piece){
+		int x;
+		int y;
+
+	  	bool flag=true;
+	  	while(flag){
+			cout<<"enter the x coordinate on the board: ";
+				cin >> x;
+
+			cout<<"enter the y coordinate on the board: ";
+				cin >> y
+
+			if((x>=0 && x<=7)&&(y>=0 && y<=7)){
+	        	if(matrix[x+1][y+1]=='_'){
+	        		matrix[x+1][y+1]=piece;
+	        		flag=false;
+	        	}
+	        }
+
+			int flipped=countandflippieces();
+
+			if(flipped<=0){
+				cout << "Player forfeits turn!" << endl;
+	      }
+	    }
+	}
 };
 
 #endif /* OTHELLO_HPP_ */
