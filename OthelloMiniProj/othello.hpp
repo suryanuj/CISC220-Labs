@@ -83,7 +83,7 @@ class Othello {
 				cin >> x;
 
 			cout<<"enter the y coordinate on the board: ";
-				cin >> y
+				cin >> y;
 
 			if((x>=0 && x<=7)&&(y>=0 && y<=7)){
 	        	if(matrix[x+1][y+1]=='_'){
