@@ -60,8 +60,8 @@ class Othello {
 		}
 
 		int counter=0;
-		for(int i=0; i<8; i++) {
-			for(int j=0; j<8; j++) {
+		for(int i=0; i<9; i++) {
+			for(int j=0; j<9; j++) {
 				cout << matrix[i][j]<<"\t";
 				counter++;
 
@@ -100,8 +100,19 @@ class Othello {
 	    }
 	}
 
-	int countandflippieces() {
+	int countandflippieces(int i, int j, string player, char piece){
+		//Checks down
+		if(matrix[i+2][j+1]!=piece && matrix[i+2][j+1]!='_'){
+	  	int counter=0;
 
+	  	for(int k=i+2;k<(8-k);k++){
+	  		if(matrix[k][j+1]==piece){
+	  			for(int k=i+2;matrix[k][j+1]==piece;k++){
+	  				counter++;
+	  				matrix[k][j]=piece;}
+	  			}
+	    	}
+		}
 	}
 
 	void ckwin(){
