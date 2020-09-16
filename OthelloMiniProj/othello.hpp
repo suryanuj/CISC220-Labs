@@ -100,7 +100,7 @@ class Othello {
 	    }
 	}
 
-	void countandflippieces() {
+	int countandflippieces() {
 
 	}
 
