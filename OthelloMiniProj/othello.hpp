@@ -99,6 +99,20 @@ class Othello {
 	      }
 	    }
 	}
+
+	void countandflippieces() {
+
+	}
+
+	void ckwin(){
+
+	}
+
+	void compplacepiece(Player p){
+
+	}
+
+
 };
 
 #endif /* OTHELLO_HPP_ */
