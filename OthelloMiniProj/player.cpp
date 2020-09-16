@@ -23,3 +23,7 @@ Player::Player (string name1, char piece1){
 void Player::setPiece (char s){
       piece = s;
 }
+
+char Player::getPiece(){
+  return piece;
+}

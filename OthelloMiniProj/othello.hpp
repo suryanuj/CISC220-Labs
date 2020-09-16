@@ -101,6 +101,7 @@ class Othello {
 	}
 
 	int countandflippieces(int i, int j, string player, char piece){
+
 		//Checks down
 		if(matrix[i+2][j+1]!=piece && matrix[i+2][j+1]!='_'){
 	  	int counter=0;
@@ -116,8 +117,45 @@ class Othello {
 	}
 
 	void ckwin(){
+		int underScoreCount;
+		int counter1;
+		int counter2;
+		bool canCheck=false;
 
-	}
+		for(int i=1;i<9;i++){
+			for(int j=1;j<9;i++){
+				if(matrix[i][j]=='_'){
+					underScoreCount++;
+				}
+			}
+		}
+
+		if(underScoreCount==0){
+		for(int i=1;i<9;i++){
+			for(int j=1;j<9;i++){
+				if(matrix[i][j]==player1.getPiece()){
+					counter1++;
+				}
+	        else {
+	          counter2++
+	          }
+			}
+	    }
+	  }
+
+	  if(counter1>counter2){
+	    cout << "Player 1 won with: " << counter1 << "versus" << counter2 << endl;
+	  }
+
+	  else if(counter2>counter1){
+	    cout << "Player 1 won with: " << counter1 << "versus" << counter2 << endl;
+	  }
+
+	  else{
+	    cout << "Tie" << endl;
+	  }
+
+}
 
 	void compplacepiece(Player p){
 

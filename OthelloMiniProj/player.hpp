@@ -22,6 +22,7 @@ class Player {
 
 		// Setter
 		void setPiece(char s);
+		char getPiece();
 
 };
 
