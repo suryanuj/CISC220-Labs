@@ -6,6 +6,7 @@
 *      Partner: Nicholas P.
  */
 #include "othello.hpp"
+#include "player.cpp"
 
 //playGame Method:
 
@@ -37,9 +38,9 @@ Othello::Othello(string st1, char c, string st2, char c2){
 void Othello::playGame(){
 	 makemat();
 	 printmat();
-	 /*bool play = true;
+	 bool play = true;
 	 int fullsqrs = 0;
-	 player p = p1;
+	 Player p = p1;
 	 bool whichp = true;
 	 bool turn = true;
 
@@ -52,11 +53,11 @@ void Othello::playGame(){
 	 while ((play) && (fullsqrs < 64)){
 		cout << endl << p.name <<" ("<<p.piece<<") choose your square: "<<endl;
 
-		if ((numplayers == 2) || ((numplayers == 1) && turn)){
+		if ((numPlayers == 2) || ((numPlayers == 1) && turn)){
 			placepiece(p);
 		}
 
-		else if ((numplayers == 0) || ((numplayers == 1) && (turn == false))){
+		else if ((numPlayers == 0) || ((numPlayers == 1) && (turn == false))){
 			compplacepiece(p);
 		}
 
@@ -71,11 +72,11 @@ void Othello::playGame(){
 			whichp = true;
 		}
 
-		fullsqrs+=1;*/
+		fullsqrs+=1;
 	}
-	//ckwin();
+	ckwin();
 
-//}
+}
 /* *************************************************************************
 and code for the main function, which should be in its own file with a .cpp
 extension, located in the same project folder as your Othello Class and your Player
