@@ -2,8 +2,8 @@
  * main.cpp
  *
  *  Created on: Sep 11, 2020
- *      Author: Suryanuj G.
- *      Partner: Nicholas P.
+ *  Author: Nicholas Perugini
+ *  Partner: Suryanuj Gupta
  */
 
 #include <iostream>

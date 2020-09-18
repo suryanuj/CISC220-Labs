@@ -1,10 +1,9 @@
 /*
  * othello.hpp
  *
- *
- *  Created on: Sep 13, 2020
- *      Author: Nick Perugini
- *      Partner: Suryanuj Gupta
+ *  Created on: Sep 11, 2020
+ *  Author: Nicholas Perugini
+ *  Partner: Suryanuj Gupta
  */
 
 #ifndef OTHELLO_HPP_

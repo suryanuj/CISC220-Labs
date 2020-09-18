@@ -2,8 +2,8 @@
  * othello.cpp
  *
  *  Created on: Sep 11, 2020
-*      Author: Nicholas Perugini
-*      Partner: Suryanuj Gupta
+ *  Author: Nicholas Perugini
+ *  Partner: Suryanuj Gupta
 */
 
 #include "othello.hpp"
@@ -94,7 +94,7 @@ void Othello::placepiece(string player, char piece){
 
 			int flipped=countandflippieces(x,y,player,piece,true);
 
-			if(flipped<=0){
+			if(flipped<0){
 				cout << "Player forfeits turn!" << endl;
 			}
 	}
