@@ -19,5 +19,3 @@ int main() {
 	Othello game3;
 	game.playGame();
 }
-
-

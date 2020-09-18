@@ -23,13 +23,6 @@ class Player {
 		Player();
 		Player(string, char);
 
-		// Setter
-		//void setPiece(char s);
-		//char getPiece();
-
 };
-
-
-
 
 #endif /* OTHELLO_HPP_ */

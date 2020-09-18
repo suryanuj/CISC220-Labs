@@ -539,8 +539,6 @@ void Othello::playGame(){
 		fullsqrs+=1;
 	}
 }
-
-
 /* *************************************************************************
 and code for the main function, which should be in its own file with a .cpp
 extension, located in the same project folder as your Othello Class and your Player
