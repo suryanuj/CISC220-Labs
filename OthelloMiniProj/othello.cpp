@@ -7,7 +7,6 @@
 */
 
 #include "othello.hpp"
-#include "player.cpp"
 
 Othello::Othello(){
 	player1.piece='O';

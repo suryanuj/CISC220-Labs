@@ -12,7 +12,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
-#include "player.cpp"
+#include "player.hpp"
 using namespace std;
 
 //static int boardSize = 8;

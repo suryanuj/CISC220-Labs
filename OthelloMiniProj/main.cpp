@@ -8,8 +8,7 @@
 
 #include <iostream>
 #include <stdlib.h>
-#include "Othello.hpp"
-#include "player.hpp"
+#include "othello.hpp"
 #include <time.h>
 using namespace std;
 
