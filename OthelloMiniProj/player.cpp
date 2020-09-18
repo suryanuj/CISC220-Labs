@@ -2,28 +2,31 @@
  * player.cpp
  *
  *  Created on: Sep 13, 2020
- *      Author: suryanuj
+ *      Author: Nick Perugini
  */
 
+#include <iostream>
+#include <stdlib.h>
+#include <string.h>
 #include "player.hpp"
 
-Player::Player (){
+using namespace std;
 
+Player::Player(){
 	name="computer";
 	piece='O';
 }
 
-
-Player::Player (string name1, char piece1){
-
+Player::Player(string name1, char piece1){
 	name=name1;
 	piece=piece1;
 }
 
-void Player::setPiece (char s){
-      piece = s;
+/*void Player::setPiece (char s){
+	piece = s;
 }
 
 char Player::getPiece(){
-  return piece;
+	return piece;
 }
+*/

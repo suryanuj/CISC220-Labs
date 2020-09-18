@@ -2,7 +2,7 @@
  * player.hpp
  *
  *  Created on: Sep 13, 2020
- *      Author: suryanuj
+ *      Author: Nick Perugini
  */
 
 #ifndef PLAYER_HPP_
@@ -13,17 +13,18 @@
 using namespace std;
 
 class Player {
+	public:
+	friend class Othello;
+
 	string name;
 	char piece;
 
-	public:
-		Player ();
-		Player (string name1, char piece1);
+	Player();
+	Player(string name1, char piece1);
 
-		// Setter
-		void setPiece(char s);
-		char getPiece();
-
+	// Setter
+	//void setPiece(char s);
+	//char getPiece();
 };
 
 
