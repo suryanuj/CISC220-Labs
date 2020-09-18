@@ -1,6 +1,8 @@
 /*
  * player.hpp
  *
+ *
+ *
  *  Created on: Sep 13, 2020
  *      Author: Nick Perugini
  */
@@ -13,18 +15,19 @@
 using namespace std;
 
 class Player {
-	public:
 	friend class Othello;
+	public:
 
 	string name;
 	char piece;
 
 	Player();
-	Player(string name1, char piece1);
+	Player(string, char);
 
-	// Setter
-	//void setPiece(char s);
-	//char getPiece();
+		// Setter
+		//void setPiece(char s);
+		//char getPiece();
+
 };
 
 
