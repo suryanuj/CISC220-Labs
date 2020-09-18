@@ -18,27 +18,23 @@ using namespace std;
 //static int boardSize = 8;
 
 class Othello {
-public:
-	char matrix[9][9];
-	Player player1;
-	Player player2;
-	int numPlayers;
+	public:
+		char matrix[9][9];
+		Player player1;
+		Player player2;
+		int numPlayers;
 
 		Othello();
 		Othello(string, char);
 		Othello(string, char, string, char);
+
 		void playGame();
 		void makemat();
 		void printmat();
 		void placepiece(string, char);
 		int countandflippieces(int, int, string, char, bool);
 		void ckwin();
-
-	void compplacepiece(Player p){
-
-	}
-
-
+		void compplacepiece(Player p);
 };
 
 #endif /* OTHELLO_HPP_ */

@@ -18,11 +18,11 @@ class Player {
 	friend class Othello;
 	public:
 
-	string name;
-	char piece;
+		string name;
+		char piece;
 
-	Player();
-	Player(string, char);
+		Player();
+		Player(string, char);
 
 		// Setter
 		//void setPiece(char s);
