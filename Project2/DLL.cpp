@@ -18,5 +18,34 @@ using namespace std;
 		numSongs=1;
 	}
 
+	void DLL::push(string t, string a, int m, int s){
+		DNode *temp = first;
+
+		temp = temp->next;
+
+
+		DNode *n = new DNode(numSongs);
+		n->prev = temp->prev;
+		temp->prev->next = n;
+		n->next = temp;
+		temp->prev = n;
+		numSongs ++;
+
+//		DNode *n = new DNode (t,a,m,s);
+//
+//		if (numSongs=0){
+//			first->prev=NULL;
+//			last->next=NULL;
+//			n.song
+//		}
+//		else {
+//			DNode *temp = last;
+//			int x = temp->song;
+//			prev->last
+//
+//
+//			last->prev=
+		}
+
 
 

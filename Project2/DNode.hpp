@@ -13,7 +13,7 @@ class DNode {
 	DNode *prev;
 	DNode *next;
 public:
-	DNode();
+	~DNode();
 	DNode(string s, string a, int lenmin, int lensec);
 };
 
