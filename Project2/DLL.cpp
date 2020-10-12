@@ -19,32 +19,35 @@ using namespace std;
 	}
 
 	void DLL::push(string t, string a, int m, int s){
-		DNode *temp = first;
 
-		temp = temp->next;
+		if (numSongs==0){
+			DNode *n = new DNode(t,a,m,s);  // makes a new node
+			first=n;
+			last=n;
+			first->prev=NULL;
+			first->next=NULL;
+			last->prev=NULL;
+			last->next=NULL;
+			numSongs=1;
+		}
 
+		else {
+			DNode *temp = last;
+			DNode *n = new DNode(t,a,m,s);  // makes a new node
+			last=n;
+			last->prev=temp;
+			last->next=NULL;
+			temp->next=last;
+			numSongs++;
+		}
+	}
 
-		DNode *n = new DNode(numSongs);
-		n->prev = temp->prev;
-		temp->prev->next = n;
-		n->next = temp;
-		temp->prev = n;
-		numSongs ++;
+	void DLL::printList(){
+		DNode *tmp = first;
 
-//		DNode *n = new DNode (t,a,m,s);
-//
-//		if (numSongs=0){
-//			first->prev=NULL;
-//			last->next=NULL;
-//			n.song
-//		}
-//		else {
-//			DNode *temp = last;
-//			int x = temp->song;
-//			prev->last
-//
-//
-//			last->prev=
+		while (tmp != NULL) {
+				tmp->song->printSong();
+
 		}
 
 
