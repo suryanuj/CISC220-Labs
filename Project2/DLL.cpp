@@ -1,4 +1,3 @@
-
 #include "DNode.hpp"
 #include "DLL.hpp"
 #include <iostream>
@@ -49,6 +48,58 @@ using namespace std;
 				tmp->song->printSong();
 
 		}
+	}
+	int DLL::remove(string t){
+		DNode *tmp;
+		       for (tmp = first;  tmp != NULL; tmp = tmp->next)  {
+				if (tmp->song->title== t) {
+					if (tmp->prev== NULL) { //REMOVES FROM FRONT
+						first = tmp->next;
+						numSongs--;
+		 			}
+					else if(tmp->next== NULL) { //REMOVES FROM LAST
+						pop(); //IMPLEMENT POP METHOD HERE ONCE WORKING
+		      			}
+					else {  //REMOVES FROM MIDDLE
+		       				tmp->prev->next=tmp->next;
+						tmp->next->prev = tmp->prev;
+						numSongs--;
+		     		 	}
+		      			cout << tmp->song->title <<", "<<tmp->song->artist<<"..............."<<tmp->song->min<<":"<<tmp->song->sec<< endl;
+		      			delete tmp;
+		      			return 1;
 
+				 }
+		  	}
+		  	return 0;
+		}
+	Song *DLL::pop() {
+		if(numSongs>1){
+			DNode *temp = last;
+			Song *x = temp->song;  //ASK TA
+			last = last->prev;
+			delete temp;
+			last->next = NULL;
+			numSongs--;
+			return x;
+		}
+		else{
+			DNode *temp = last;
+			Song *x = temp->song;  //ASK TA
+			delete temp;
+			first->prev=NULL;
+			first->next=NULL;
+			last->prev=NULL;
+			last->next=NULL;
+			numSongs=0;
+			return x;
+		}
+	}
 
+	void DLL::moveUp(string t){
+		DNode *tmp;
+		for (tmp = first;  tmp->song->title != t; tmp = tmp->next){
 
+		}
+
+	}
