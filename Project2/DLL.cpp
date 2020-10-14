@@ -160,7 +160,6 @@ using namespace std;
 	void DLL::moveDown(string t){
 			DNode *tmp;
 			DNode *swapWith;
-			int counter=0;
 			for (tmp = first;  tmp->song->title != t; tmp = tmp->next){
 				if(tmp->next==NULL){
 					DNode *oglast=last;
@@ -235,4 +234,56 @@ using namespace std;
 		}
 		first=NULL;
 		last=NULL;
+		first->prev=NULL;
+		first->next=NULL;
+		last->prev=NULL;
+		last->next=NULL;
+	}
+	
+	void DLL::makeRandom(){
+		DNode *templast = NULL;
+		DNode *tempfirst = first;
+		DNode *tempfirst_next=NULL;
+		DNode *templast_next=NULL;
+		
+		for (int i=1; i <numSongs; i++){
+			tempfirst=tempfirst->next;
+			templast=tempfirst->next;
+			templast->prev=NULL;
+			
+			tempfirst->next=NULL;
+			tempfirst=first;
+			
+			tempfirst_next=tempfirst->next;
+			tempfirst_next->prev=tempfirst;
+			
+			templast_next->next=templast->next;
+			templast_next->prev=templast;
+			
+			first=templast;
+			last=tempfirst;
+		}
+		
+		
+		
+		
+		/*DNode *current = first;
+		int randnum(1, numSongs);
+		for (int i=0; i<numSongs; i++){
+			if (*current->next != NULL;){
+				current=current->next;
+			}
+			else {
+				current = first;
+				current=current->next;
+				
+			}
+			if (*current->prev !=NULL){
+				current -> prev -> next;
+				first->prev;
+				current->prev;
+			}
+			first=current;
+			
+		}*/
 	}
