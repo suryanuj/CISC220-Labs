@@ -207,3 +207,19 @@ using namespace std;
 				a->next=b;
 			}
 		}
+
+	void DLL::listDuration(int *tm,int *ts){
+		DNode *tmp = first;
+
+		while (tmp != NULL) {
+				*tm+=tmp->song->min;
+				*ts+=tmp->song->sec;
+				tmp=tmp->next;
+		}
+
+		if(*ts>60){				//Converts extra seconds to minutes
+			int x=*ts/60;
+			*tm+=x;
+			*ts=*ts%60;
+		}
+	}
