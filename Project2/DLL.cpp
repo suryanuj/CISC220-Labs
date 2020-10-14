@@ -103,7 +103,7 @@ using namespace std;
 		DNode *swapWith;
 		int counter=0;
 		for (tmp = first;  tmp->song->title != t; tmp = tmp->next){
-			if(tmp->prev==NULL;){
+			if(tmp->prev==NULL){
 				DNode *ogfirst=first;
 
 				remove(first->song->title);		//removes original first
@@ -162,7 +162,7 @@ using namespace std;
 			DNode *swapWith;
 			int counter=0;
 			for (tmp = first;  tmp->song->title != t; tmp = tmp->next){
-				if(tmp->next==NULL;){
+				if(tmp->next==NULL){
 					DNode *oglast=last;
 					DNode *firstHolder=first;
 
@@ -222,4 +222,17 @@ using namespace std;
 			*tm+=x;
 			*ts=*ts%60;
 		}
+	}
+
+	DLL::~DLL(){						//Not sure if this function works. Once we create random we can test everything.
+		DNode *current=first;
+		DNode *next;
+
+		while (current != NULL) {
+			next=current->next;
+			free(current);
+			current=next;
+		}
+		first=NULL;
+		last=NULL;
 	}
