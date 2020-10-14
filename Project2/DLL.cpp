@@ -101,7 +101,6 @@ using namespace std;
 	void DLL::moveUp(string t){
 		DNode *tmp;
 		DNode *swapWith;
-		int counter=0;
 		for (tmp = first;  tmp->song->title != t; tmp = tmp->next){
 			if(tmp->prev==NULL){
 				DNode *ogfirst=first;
@@ -118,14 +117,8 @@ using namespace std;
 			tmp=tmp->next;
 		}
 		swapWith=tmp->prev;
-		if(swapWith->prev!=NULL){			//Condition if node and swap node are in between two others
-			/*swapWith->prev->next=tmp;
-			tmp->next->prev=swapWith;
-			tmp->prev=swapWith->prev;
-			swapWith->prev=tmp;
-			swapWith->next=tmp->next;
-			tmp->next=swapWith;
-			*/
+		if(swapWith->prev!=NULL && tmp->next!=NULL){			//Condition if node and swap node are in between two others
+
 			DNode *a=tmp->prev->prev;
 			DNode *b=tmp->prev;
 			DNode *c=tmp;
@@ -138,13 +131,18 @@ using namespace std;
 			b->next=d;
 			d->prev=b;
 		}
-		else{								//Condition if node and swap node only have one node next to them
-			/*tmp->next->prev=swapWith;
-			tmp->prev=swapWith->prev;
-			swapWith->prev=tmp;
-			swapWith->next=tmp->next;
-			tmp->next=swapWith;
-			*/
+		if(tmp->next==NULL;){			//Case if we are moving last element forward
+			DNode *a=tmp->prev->prev;
+			DNode *b=tmp->prev;
+			DNode *c=tmp;
+
+			a->next=c;
+			c->prev=a;
+			c->next=b;
+			b->prev=c;
+			b->next=NULL;
+		}
+		if(swapWith->prev==NULL;){								//Condition if node and swap node prev is first
 
 			DNode *a=tmp->prev;
 			DNode *b=tmp;
@@ -180,7 +178,7 @@ using namespace std;
 				tmp=tmp->next;
 			}
 			swapWith=tmp->next;
-			if(swapWith->next!=NULL){			//Condition if node and swap node are in between two others
+			if(swapWith->next!=NULL && tmp->prev!=NULL){			//Condition if node and swap node are in between two others
 				DNode *a=tmp->next->next;
 				DNode *b=tmp->next;
 				DNode *c=tmp;
@@ -194,7 +192,7 @@ using namespace std;
 				d->next=b;
 
 			}
-			else{							//Condition if node and swap node only have one node next to them
+			if(swapWith->next==NULL){							//Condition if node and swap node only have one node next to them
 				DNode *a=tmp->next;
 				DNode *b=tmp;
 				DNode *c=tmp->prev;
@@ -204,6 +202,18 @@ using namespace std;
 				b->next=NULL;
 				b->prev=a;
 				a->next=b;
+			}
+			if(tmp->prev==NULL){
+				DNode *a=tmp->next->next;
+				DNode *b=tmp->next;
+				DNode *c=tmp;
+
+				a->prev=c;
+				c->next=a;
+				c->prev=b;
+				b->next=c;
+				b->prev=NULL;
+
 			}
 		}
 
@@ -239,34 +249,34 @@ using namespace std;
 		last->prev=NULL;
 		last->next=NULL;
 	}
-	
+
 	void DLL::makeRandom(){
 		DNode *templast = NULL;
 		DNode *tempfirst = first;
 		DNode *tempfirst_next=NULL;
 		DNode *templast_next=NULL;
-		
+
 		for (int i=1; i <numSongs; i++){
 			tempfirst=tempfirst->next;
 			templast=tempfirst->next;
 			templast->prev=NULL;
-			
+
 			tempfirst->next=NULL;
 			tempfirst=first;
-			
+
 			tempfirst_next=tempfirst->next;
 			tempfirst_next->prev=tempfirst;
-			
+
 			templast_next->next=templast->next;
 			templast_next->prev=templast;
-			
+
 			first=templast;
 			last=tempfirst;
 		}
-		
-		
-		
-		
+
+
+
+
 		/*DNode *current = first;
 		int randnum(1, numSongs);
 		for (int i=0; i<numSongs; i++){
@@ -276,7 +286,7 @@ using namespace std;
 			else {
 				current = first;
 				current=current->next;
-				
+
 			}
 			if (*current->prev !=NULL){
 				current -> prev -> next;
@@ -284,6 +294,6 @@ using namespace std;
 				current->prev;
 			}
 			first=current;
-			
+
 		}*/
 	}
