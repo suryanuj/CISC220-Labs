@@ -55,6 +55,7 @@ using namespace std;
 				if (tmp->song->title== t) {
 					if (tmp->prev== NULL) { //REMOVES FROM FRONT
 						first = tmp->next;
+						first->prev=NULL;
 						numSongs--;
 		 			}
 					else if(tmp->next== NULL) { //REMOVES FROM LAST
@@ -98,8 +99,31 @@ using namespace std;
 
 	void DLL::moveUp(string t){
 		DNode *tmp;
+		DNode *swapWith;
+		int counter=0;
 		for (tmp = first;  tmp->song->title != t; tmp = tmp->next){
-
+			if(tmp->prev==NULL;){
+				DNode *ogfirst=first;
+				remove(first->song->title);
+				push(ogfirst->song->title,ogfirst->song->artist,ogfirst->song->min,ogfirst->song->sec);
+				delete ogfirst;
+				}
+			tmp=tmp->next;
 		}
-
+		swapWith=tmp->prev;
+		if(swapWith->prev!=NULL){
+			swapWith->prev->next=tmp;
+			tmp->next->prev=swapWith;
+			tmp->prev=swapWith->prev;
+			swapWith->prev=tmp;
+			swapWith->next=tmp->next;
+			tmp->next=swapWith;
+		}
+		else{
+			tmp->next->prev=swapWith;
+			tmp->prev=swapWith->prev;
+			swapWith->prev=tmp;
+			swapWith->next=tmp->next;
+			tmp->next=swapWith;
+		}
 	}
