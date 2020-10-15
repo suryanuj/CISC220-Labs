@@ -16,8 +16,8 @@ public:
 	DLL();  // constructor - initializes an empty list
 	DLL(string t, string l, int m, int s);  // constructor, initializes a list with one new node with data x
 	void push(string t, string a, int m, int s);  // does what you'd think
-	Song *pop();  //does what you'd think
-	int remove(string t);
+	void pop();  //does what you'd think
+	void remove(string t);
 	void makeRandom();  // randomizes the order of the list
 	void moveUp(string t);  // moves song with title s up one in the playlist.
 	                        //If it is at the beginning of the list,
