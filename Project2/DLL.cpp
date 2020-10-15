@@ -50,7 +50,7 @@ using namespace std;
 
 		}
 	}
-	int DLL::remove(string t){
+	void DLL::remove(string t){
 		DNode *tmp;
 		       for (tmp = first;  tmp != NULL; tmp = tmp->next)  {
 				if (tmp->song->title== t) {
@@ -71,11 +71,9 @@ using namespace std;
 		     		 	}
 		      			cout << "REMOVED: " << tmp->song->title <<", "<<tmp->song->artist<<"..............."<<tmp->song->min<<":"<<tmp->song->sec<< endl;
 		      			delete tmp;
-		      			return 1;
 
 				 }
 		  	}
-		  	return 0;
 		}
 	void DLL::pop() {				//Set return type to void so that it can be used inside remove function
 		if(numSongs>1){				//It seemed having it return a song type did not serve any purpose.
@@ -96,84 +94,84 @@ using namespace std;
 
 	void DLL::moveUp(string t){										//Only works if not at the very start of the list
 		DNode *tmp=first;
-		DNode *swapWith;
+		DNode *ogfirst=first;
 		while(tmp->song->title != t){
 			tmp=tmp->next;
 		}
-		if(tmp->prev==NULL){									//This is the only condition that needs to be worked on. It is the condition where it goes from the start of the list to the end
+
+		if(tmp->prev==NULL && tmp->next!=NULL){									//This is the only condition that needs to be worked on. It is the condition where it goes from the start of the list to the end
+
+			DNode *temp = last;
+			DNode *n = new DNode(ogfirst->song->title,ogfirst->song->artist,ogfirst->song->min,ogfirst->song->sec);  // makes a new node
+			last=n;
+			last->prev=temp;
+			last->next=NULL;
+			temp->next=last;
 
 			first=first->next;
 			first->prev=NULL;
 
-			push(first->song->title,first->song->artist,first->song->min,first->song->sec);
+				}
 
-		}
+		else if(tmp->prev->prev!=NULL && tmp->next!=NULL){			//Condition if node and swap node are in between two others
 
-		swapWith=tmp->prev;
-		if(swapWith->prev!=NULL && tmp->next!=NULL){			//Condition if node and swap node are in between two others
+					DNode *a=tmp->prev->prev;
+					DNode *b=tmp->prev;
+					DNode *c=tmp;
+					DNode *d=tmp->next;
 
-			DNode *a=tmp->prev->prev;
-			DNode *b=tmp->prev;
-			DNode *c=tmp;
-			DNode *d=tmp->next;
-
-			a->next=c;
-			c->prev=a;
-			c->next=b;
-			b->prev=c;
-			b->next=d;
-			d->prev=b;
-		}
+					a->next=c;
+					c->prev=a;
+					c->next=b;
+					b->prev=c;
+					b->next=d;
+					d->prev=b;
+				}
 		else if(tmp->next==NULL){			//Case if we are moving last element forward
-			DNode *a=tmp->prev->prev;
-			DNode *b=tmp->prev;
-			DNode *c=tmp;
+					DNode *a=tmp->prev->prev;
+					DNode *b=tmp->prev;
+					DNode *c=tmp;
 
-			a->next=c;
-			c->prev=a;
-			c->next=b;
-			b->prev=c;
-			b->next=NULL;
-		}
-		else if(swapWith->prev==NULL){								//Condition if node and swap node prev is first
+					a->next=c;
+					c->prev=a;
+					c->next=b;
+					b->prev=c;
+					b->next=NULL;
+				}
+		else if(tmp->prev->prev==NULL){								//Condition if node and swap node prev is first
 
-			DNode *a=tmp->prev;
-			DNode *b=tmp;
-			DNode *c=tmp->next;
+					DNode *a=tmp->prev;
+					DNode *b=tmp;
+					DNode *c=tmp->next;
 
-			a->next=c;
-			a->prev=b;
-			c->prev=a;
-			b->prev=NULL;
-			b->next=a;
-		}
-	}
+					a->next=c;
+					a->prev=b;
+					c->prev=a;
+					b->prev=NULL;
+					b->next=a;
+				}
+		//delete tmp;
+		//delete ogfirst;
+			}
 	void DLL::moveDown(string t){								//Only works if not at the very end of the list
-			DNode *tmp;
-			DNode *swapWith;
-			for (tmp = first;  tmp->song->title != t; tmp = tmp->next){
-				if(tmp->next==NULL){										//This is the only condition that needs to be worked on. It should send the last Node to the start and make it the first Node
-					DNode *oglast=last;										//It may have to be rewritten entirely
-					DNode *firstHolder=first;
-
-					remove(last->song->title);		//Removes last Node
-
-					last=oglast->prev;				//Sets last Node to node to previous to last node
-					last->next=NULL;
-
-					oglast->next=first->next;		//Sets last Node in list to first Node in list
-					first=oglast;
-					first->prev=NULL;
-
-					//push(firstholder->song->title,firstholder->song->artist,firstholder->song->min,firstholder->song->sec);
-
-					delete oglast;
-					delete firstHolder;
-					}
+			DNode *tmp=first;
+			while(tmp->song->title != t){
 				tmp=tmp->next;
 			}
-			swapWith=tmp->next;
-			if(swapWith->next!=NULL && tmp->prev!=NULL){			//Condition if node and swap node are in between two others
+			if(tmp->next==NULL){										//Condition if node is last in list
+					DNode *oglast=tmp;
+					DNode *firstHolder=first;
+
+					pop();			//Sets last Node to node to previous to last node
+
+					tmp->next=first->next;		//Sets last Node in list to first Node in list
+					first=oglast;
+					first->next=firstHolder;
+					first->prev=NULL;
+					firstHolder->prev=first;
+
+			}
+			else if(tmp->next->next!=NULL && tmp->prev!=NULL){			//Condition if node and swap node are in between two others
 				DNode *a=tmp->next->next;
 				DNode *b=tmp->next;
 				DNode *c=tmp;
@@ -187,7 +185,7 @@ using namespace std;
 				d->next=b;
 
 			}
-			else if(swapWith->next==NULL){							//Condition if node and swap node only have one node next to them
+			else if(tmp->next->next==NULL){							//Condition if node and swap node only have one node next to them (at end)
 				DNode *a=tmp->next;
 				DNode *b=tmp;
 				DNode *c=tmp->prev;
@@ -198,7 +196,7 @@ using namespace std;
 				b->prev=a;
 				a->next=b;
 			}
-			else if(tmp->prev==NULL){
+			else if(tmp->prev==NULL){							//Condition if node is first in list
 				DNode *a=tmp->next->next;
 				DNode *b=tmp->next;
 				DNode *c=tmp;
@@ -208,6 +206,7 @@ using namespace std;
 				c->prev=b;
 				b->next=c;
 				b->prev=NULL;
+				first=b;
 
 			}
 		}
