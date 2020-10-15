@@ -1,3 +1,11 @@
+/*
+ * Playlist.hpp
+ *
+ *  Created on: Oct 15, 2020
+ *      Author: Suryanuj Gupta and Nicholas Perugini
+ */
+
+
 #ifndef PLAYLIST_HPP_
 #define PLAYLIST_HPP_
 #include "DLL.hpp"

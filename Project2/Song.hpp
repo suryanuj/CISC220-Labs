@@ -1,3 +1,10 @@
+/*
+ * Song.hpp
+ *
+ *  Created on: Oct 15, 2020
+ *      Author: Suryanuj Gupta and Nicholas Perugini
+ */
+
 
 #ifndef SONG_HPP_
 #define SONG_HPP_

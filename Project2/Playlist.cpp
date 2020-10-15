@@ -1,3 +1,10 @@
+/*
+ * Playlist.cpp
+ *
+ *  Created on: Oct 15, 2020
+ *      Author: Suryanuj Gupta and Nicholas Perugini
+ */
+
 
 #include <fstream>
 #include <stdlib.h>
