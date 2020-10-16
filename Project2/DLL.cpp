@@ -253,25 +253,30 @@ using namespace std;
 
 	}
 
-	void DLL::makeRandom(){						//This does not work
-		int numLoops= rand() % 5 + 5;
-		int counter=0;
-		while(counter<numLoops){
+	void DLL::makeRandom(){
+			cout << "Shuffling..." << endl;
 			DNode *tmp=first;
-
-			int randnum = rand() % numSongs+1;
-			int counterNest=1;
-			while(counterNest<=randnum || tmp->next!=NULL){
-				tmp=tmp->next;
-				counterNest++;
+			int counter=0;
+			while(counter<40){
+				if(tmp==NULL || tmp==last){
+					tmp=first;
+				}
+				int randnum = rand() % 3+1;
+				if(randnum==1){
+					moveUp(tmp->song->title);
+				}
+				else if(randnum==2){
+					moveDown(tmp->song->title);		}
+				else{
+					moveUp(tmp->song->title);
+					moveUp(tmp->song->title);
+							}
+				if(randnum!=2){
+					tmp=tmp->next;
+				}
+				else{
+					tmp=tmp->prev;
+				}
+				counter++;
 			}
-
-			if(counterNest%2==1){
-				moveUp(tmp->song->title);
-			}
-			else{
-				moveDown(tmp->song->title);
-			}
-			counter++;
-			}
-		}
+	}
