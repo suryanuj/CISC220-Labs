@@ -7,7 +7,7 @@ in BST.hpp
 #include <iostream>
 using namespace std;
 
-BST::BST(){
+BST::BST() {
 	root = NULL;
 }
 BST::BST(string s) {
