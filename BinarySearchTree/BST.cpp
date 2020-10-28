@@ -5,6 +5,8 @@ in BST.hpp
 */
 #include "BST.hpp"
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 using namespace std;
 
 BST::BST() {
@@ -159,11 +161,25 @@ TNode *BST::remove(string s){
 		removeOneKid(tmp,true);
 		}
 	else{
-		//code to remove with two kids
+		if(tmp->left->right==NULL){	//condition if left node does not have a child to the right
+			tmp->left->parent=tmp->parent;
+			tmp->parent->left=tmp->left;
+			delete(tmp);
+		}
+		else{
+			TNode *rmving=tmp;
+			tmp=tmp->left;
+			while(tmp->right!=NULL){
+				tmp=tmp->right;
+			}
+			rmving->data=tmp->data;
+			delete(tmp);
+		}
 	}
 }
 
 TNode *BST::removeNoKids(TNode *tmp){
+
 	delete(tmp);
 	return tmp;				//Can i return tmp after deleting it?
 }
@@ -171,16 +187,34 @@ TNode *BST::removeNoKids(TNode *tmp){
 TNode *BST::removeOneKid(TNode *tmp,bool leftFlag){
 	if(leftFlag==false){
 		tmp->right->parent=tmp->parent;
-		tmp->parent->right=tmp->right;
+		if(tmp->parent->right==tmp){
+			tmp->parent->right=tmp->right;
+		}
+		else{
+			tmp->parent->left=tmp->right;
+		}
 		delete(tmp);
 	}
 	else{
-		tmp->right->parent=tmp->parent;
-		tmp->parent->right=tmp->right;
+		tmp->left->parent=tmp->parent;
+		if(tmp->parent->left==tmp){
+		tmp->parent->left=tmp->left;
+		}
+		else{
+			tmp->parent->right=tmp->left;
+		}
 		delete(tmp);
 	}
 }
 
 void BST::setHeight(TNode *n){
 
-}
+	if(root==NULL){
+		return;
+	}
+	else {
+		int left_height = setHeight(root->left);
+		int right_height = setHeight(root->right);
+
+		return max(left_height, right_height)+1
+	}
