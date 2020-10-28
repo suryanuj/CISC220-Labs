@@ -1,10 +1,6 @@
 /*
- * DLL.cpp
- *
- *  Created on: Oct 15, 2020
- *      Author: Suryanuj Gupta and Nicholas Perugini
+ *	Nick Perugini & Shaun Gupta
  */
-
 #include "DNode.hpp"
 #include "DLL.hpp"
 #include <iostream>
@@ -159,10 +155,8 @@ using namespace std;
 					b->next=a;
 					first=b;
 				}
-		//delete tmp;
-		//delete ogfirst;
 			}
-	void DLL::moveDown(string t){								//Only works if not at the very end of the list
+	void DLL::moveDown(string t){
 			DNode *tmp=first;
 			while(tmp->song->title != t){
 				tmp=tmp->next;
@@ -253,29 +247,29 @@ using namespace std;
 	}
 
 	void DLL::makeRandom(){
-			cout << "Shuffling..." << endl;
-			DNode *tmp=first;
-			int counter=0;
-			while(counter<40){
-				if(tmp==NULL || tmp==last){
-					tmp=first;
-				}
-				int randnum = rand() % 3+1;
-				if(randnum==1){
-					moveUp(tmp->song->title);
-				}
-				else if(randnum==2){
-					moveDown(tmp->song->title);		}
-				else{
-					moveUp(tmp->song->title);
-					moveUp(tmp->song->title);
-							}
-				if(randnum!=2){
-					tmp=tmp->next;
-				}
-				else{
-					tmp=tmp->prev;
-				}
-				counter++;
+		cout << "Shuffling..." << endl;
+		DNode *tmp=first;
+		int counter=0;
+		while(counter<40){
+			if(tmp==NULL || tmp==last){
+				tmp=first;
 			}
+			int randnum = rand() % 3+1;
+			if(randnum==1){
+				moveUp(tmp->song->title);
+			}
+			else if(randnum==2){
+				moveDown(tmp->song->title);		}
+			else{
+				moveUp(tmp->song->title);
+				moveUp(tmp->song->title);
+						}
+			if(randnum!=2){
+				tmp=tmp->next;
+			}
+			else{
+				tmp=tmp->prev;
+			}
+			counter++;
+		}
 	}

@@ -1,11 +1,3 @@
-/*
- * Song.cpp
- *
- *  Created on: Oct 15, 2020
- *      Author: Suryanuj Gupta and Nicholas Perugini
- */
-
-
 #include "Song.hpp"
 #include <iostream>
 #include <stdlib.h>
