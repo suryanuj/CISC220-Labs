@@ -1,9 +1,10 @@
 /*
  * Phrase.cpp
  *
- *  Created on: Apr 10, 2020
- *      Author: 13027
+ *  Created on: Oct 30, 2020
+ *      Author: Suryanuj Gupta & Nicholas Perugini
  */
+
 #include <iostream>
 #include <string>
 #include "Phrase.hpp"

@@ -1,8 +1,8 @@
 /*
  * bstmain.cpp
  *
- *  Created on: Apr 3, 2020
- *      Author: 13027
+ *  Created on: Oct 30, 2020
+ *      Author: Suryanuj Gupta & Nicholas Perugini
  */
 
 #include "BST.hpp"

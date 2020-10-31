@@ -1,8 +1,8 @@
 /*
  * BST.hpp
  *
- *  Created on: Apr 10, 2020
- *      Author: 13027
+ *  Created on: Oct 30, 2020
+ *      Author: Suryanuj Gupta & Nicholas Perugini
  */
 
 #ifndef BST_HPP_
@@ -30,8 +30,8 @@ public:
 	TNode *removeOneKid(TNode *tmp, bool leftFlag);
 	TNode *remove(string s);
 	void setHeight(TNode *n);
+	TNode *findRec(TNode *root,string s);
 };
-
 
 
 

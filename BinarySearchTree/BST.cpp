@@ -1,9 +1,12 @@
-/*Note: you must create the BST.cpp file.  I'm only including a few 
-Otherwise, as specified in the directions, you must write the BST.cpp.
-including the method definitions to accompany the method declarations 
-in BST.hpp
-*/
+/*
+ * BST.cpp
+ *
+ *  Created on: Oct 30, 2020
+ *      Author: Suryanuj Gupta & Nicholas Perugini
+ */
+
 #include "BST.hpp"
+#include <string>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,6 +15,7 @@ using namespace std;
 BST::BST() {
 	root = NULL;
 }
+
 BST::BST(string s) {
 	root = new TNode(s);
 }
@@ -20,49 +24,52 @@ void BST::printTreeIO() {
 	if (root == NULL ) {
 		cout << "Empty Tree" << endl;
 	}
+
 	else {
 		cout << endl<<"Printing In Order:" <<endl;
 		printTreeIO(root);
 	}
 }
 
-
 void BST::printTreePre() {
 	if (root == NULL ) {
 		cout << "Empty Tree" << endl;
 	}
+
 	else {
 		cout << endl<<"Printing PreOrder:" <<endl;
 		printTreePre(root);
 	}
 }
 
-
 void BST::printTreePost() {
 	if (root == NULL ) {
 		cout << "Empty Tree" << endl;
 	}
+
 	else {
 		cout << endl<<"Printing PostOrder:" <<endl;
 		printTreePost(root);
 	}
 }
 
-
 void BST::clearTree() {
 	if (root == NULL) {
 		cout << "Tree already empty" << endl;
 	}
+
 	else {
 		cout << endl << "Clearing Tree:" << endl;
 		clearTree(root);
 		root = NULL;
 	}
 }
+
 void BST::clearTree(TNode *tmp) {
 	if (tmp == NULL) {
 		return;
 	}
+
 	else {
 		clearTree(tmp->left);
 		clearTree(tmp->right);
@@ -71,39 +78,56 @@ void BST::clearTree(TNode *tmp) {
 	}
 }
 
-TNode *BST::insertRec(TNode *root,string s){		//helper function
-	if(root==NULL){
-			return new TNode(s);
-		}
-	else if(s<=root->data){
-		root->left=insertRec(root->left,s);
-	}
-	else if(s>root->data){
-		root->right=insertRec(root->right,s);
-	}
-	return root;
-}
-
 bool BST::insert(string s){
-	TNode *newNode= insertRec(root,s);
-	if(newNode==NULL){
-		return false;
+	TNode *tmp1 = new TNode(s);
+	if (root != NULL){
+		TNode *tmp2 = root;
+
+		while (tmp2 != NULL){
+			if((tmp1->data->phrase) > (tmp2->data->phrase)){
+				if(tmp2->right == NULL){
+					tmp2->right = tmp1;
+					tmp1->parent = tmp2;
+					setHeight(tmp1);
+					return true;
+				}
+				tmp2 = tmp2 ->right;
+			}
+
+			else if ((tmp1->data->phrase) < (tmp2->data->phrase)){
+				if(tmp2->left == NULL){
+					tmp2->left = tmp1;
+					tmp1->parent = tmp2;
+					setHeight(tmp1);
+					return true;
+				}
+				tmp2 = tmp2->left;
+			}
+
+			else if (tmp1->data->phrase == s){
+				return false;
+			}
+		}
 	}
-	root=newNode;
-	setHeight;
-	return true;
+
+	else{
+		root = tmp1;
+		setHeight(tmp1);
+		return true;
+	}
+	return false;
 }
 
-TNode * findRec(TNode *root, string s){
+TNode * BST::findRec(TNode *root, string s){
 	if (root==NULL){
 		return NULL;
 	}
 
-	else if (root->data==0){
+	else if ((root->data->phrase).compare(s)==0){
 		return root;
 	}
 
-	else if (root->data<0){
+	else if ((root->data->phrase).compare(s)<0){
 		return findRec(root->right,s);
 	}
 
@@ -111,14 +135,14 @@ TNode * findRec(TNode *root, string s){
 	}
 
 TNode *BST::find(string s){
-		return findRec(root,s);
+	return findRec(root,s);
 	}
 
-
-void BST::printTreeIO(TNode *n) {   //recursive!!!! function
+void BST::printTreeIO(TNode *n) {
 	if (n == NULL) {
 		return;
 	}
+
 	else {
 		printTreeIO(n->left);
 		n->printNode();
@@ -130,91 +154,134 @@ void BST::printTreePre(TNode *n){
 	if (n == NULL) {
 			return;
 		}
-		else {
-			n->printNode();
-			printTreeIO(n->left);
-			printTreeIO(n->right);
-		}
+
+	else {
+		n->printNode();
+		printTreePre(n->left);
+		printTreePre(n->right);
 	}
+}
 
 void BST::printTreePost(TNode *n){
 	if (n == NULL) {
 			return;
-		}
-		else {
-			printTreeIO(n->left);
-			printTreeIO(n->right);
-			n->printNode();
-		}
 	}
+	else {
+		printTreePost(n->left);
+		printTreePost(n->right);
+		n->printNode();
+		}
+}
 
 TNode *BST::remove(string s){
-	TNode *tmp=find(s);
-	if(tmp->left==NULL & tmp->right==NULL){
-		removeNoKids(tmp);
-		return tmp;
-	}
-	else if(tmp->left!=NULL & tmp->right==NULL){
-		removeOneKid(tmp,false);
-	}
-	else if(tmp->left==NULL & tmp->right!=NULL){
-		removeOneKid(tmp,true);
-		}
-	else{
-		if(tmp->left->right==NULL){	//condition if left node does not have a child to the right
-			tmp->left->parent=tmp->parent;
-			tmp->parent->left=tmp->left;
-			delete(tmp);
-		}
-		else{
-			TNode *rmving=tmp;
-			tmp=tmp->left;
-			while(tmp->right!=NULL){
-				tmp=tmp->right;
-			}
-			rmving->data=tmp->data;
-			delete(tmp);
-		}
-	}
+	TNode * tmp = find(s);
+	        if(tmp->right == NULL && tmp->left == NULL){
+	                return removeNoKids(tmp);
+	        }
+
+	        else if(((tmp->right == NULL) && (tmp->left != NULL)) || ((tmp->right != NULL) && (tmp->left == NULL))){
+	                if(tmp->left == NULL){
+	                        return removeOneKid(tmp, false);
+	                }
+
+	                else if(tmp->right == NULL){
+	                        return removeOneKid(tmp, true);
+	                }
+	        }
+
+	        else if(((tmp->right != NULL) && (tmp->left != NULL))){		//Root case
+	        	TNode * tmp2 = tmp;
+					tmp2 = tmp2->left;
+
+					while(tmp2->right != NULL){
+						tmp2 = tmp2->right;
+					}
+					tmp->data->phrase = tmp2->data->phrase;
+
+					if(tmp2->left == NULL){
+						removeNoKids(tmp2);
+					}
+
+					else{
+						removeOneKid(tmp2, true);
+					}
+			        return tmp2;
+				}
 }
 
 TNode *BST::removeNoKids(TNode *tmp){
+	    if(tmp->parent->data->phrase < tmp->data->phrase){
+	                tmp->parent->right = NULL;
+	        }
 
-	delete(tmp);
-	return tmp;				//Can i return tmp after deleting it?
-}
+	        else{
+	                tmp->parent->left = NULL;
+	        }
+        setHeight(tmp->parent);
+	    return tmp;
+	}
 
 TNode *BST::removeOneKid(TNode *tmp,bool leftFlag){
-	if(leftFlag==false){
-		tmp->right->parent=tmp->parent;
-		if(tmp->parent->right==tmp){
-			tmp->parent->right=tmp->right;
-		}
-		else{
-			tmp->parent->left=tmp->right;
-		}
-		delete(tmp);
-	}
-	else{
-		tmp->left->parent=tmp->parent;
-		if(tmp->parent->left==tmp){
-		tmp->parent->left=tmp->left;
-		}
-		else{
-			tmp->parent->right=tmp->left;
-		}
-		delete(tmp);
-	}
+	 if(tmp->parent->left==tmp){
+	                if(leftFlag==true){
+	                        tmp->parent->left = tmp->left;
+	                        tmp->left->parent = tmp->parent;
+	                }
+
+	                else{
+	                        tmp->parent->left = tmp->right;
+	                        tmp->right->parent = tmp->parent;
+	                }
+	                TNode *tmpRem=tmp;
+
+	                while(tmpRem->left!=NULL){
+	                	tmpRem=tmpRem->left;
+	                }
+	                setHeight(tmpRem);
+	        }
+	        else {
+	                if(leftFlag==true){
+	                        tmp->parent->right = tmp->left;
+	                        tmp->left->parent = tmp->parent;
+	                }
+
+	                else{
+	                        tmp->parent->right = tmp->right;
+	                        tmp->right->parent = tmp->parent;
+	                }
+	                TNode *tmpRem=tmp;
+
+	                while(tmpRem->right!=NULL){
+	                	tmpRem=tmpRem->right;
+	                	                }
+	                	                setHeight(tmpRem);
+	        }
+	        return tmp;
 }
 
-void BST::setHeight(TNode *n){
+void BST::setHeight(TNode * n){
+	while(n!=root){
+		n=n->parent;
+		if(n->right != NULL && n->left != NULL){
+			if((n->right->height < n->left->height)){
+				n->height = n->left->height+1;
+			}
 
-	if(root==NULL){
-		return;
-	}
-	else {
-		int left_height = setHeight(root->left);
-		int right_height = setHeight(root->right);
+			else{
+				n->height = n->right->height + 1;
+			}
+		}
 
-		return max(left_height, right_height)+1
+		else if((n->left==NULL) && (n->right==NULL)){
+			n->height=1;
+		}
+
+		else if(n->left == NULL){
+			n->height = n->right->height+1;
+		}
+
+		else{
+			n->height = n->left->height + 1;
+		}
 	}
+}

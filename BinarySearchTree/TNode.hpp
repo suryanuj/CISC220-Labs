@@ -1,8 +1,8 @@
 /*
  * TNode.hpp
  *
- *  Created on: Apr 3, 2020
- *      Author: 13027
+ *  Created on: Oct 30, 2020
+ *      Author: Suryanuj Gupta & Nicholas Perugini
  */
 
 #ifndef TNODE_HPP_
