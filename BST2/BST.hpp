@@ -17,7 +17,7 @@ public:
 	BST();
 	BST(string sarr[]);  // updated
 	bool insert(string sarr[]);  //updated
-	TNode *find(string l, string f); //updated
+	TNode *find(string l, string f); //updated			//find is different here
 	void printTreeIO();
 	void printTreeIO(TNode *n);
 	void printTreePre();
@@ -30,7 +30,7 @@ public:
 	TNode *removeOneKid(TNode *tmp, bool leftFlag);
 	TNode *remove(string s, string l);  //updated
 	void setHeight(TNode *n);
-
+	void updateHeight(TNode *n);
 	/******************New for AVL ***************************/
 	int getBalance(TNode *tmp);
 	TNode *rotateRight(TNode *tmp);

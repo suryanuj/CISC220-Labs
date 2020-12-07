@@ -11,8 +11,8 @@ using namespace std;
 
 int main() {
 /************Part 1 - before you've added in the balancing and rotations *****/
-//	StudentTreeInfo *studtree = new StudentTreeInfo("TestRightLeft.txt");
-//	cout << "************************************" << endl;
+	//StudentTreeInfo *studtree = new StudentTreeInfo("TestRightLeft.txt");
+	//cout << "************************************" << endl;
 /************End of Part 1*********************/
 
 
@@ -21,7 +21,7 @@ int main() {
 //	StudentTreeInfo *studtree = new StudentTreeInfo("Testleft.txt");
 //	cout << "************************************" << endl;
 //	studtree->tree->clearTree();
-//
+
 //	delete studtree;
 /**********End of Part 2 *************************/
 
@@ -48,7 +48,7 @@ int main() {
 
 /***** Part 5 testing the left-right rotations *****/
 //	cout << "********* Testing leftright ************" << endl;
-//	studtree = new StudentTreeInfo("TestLeftRight.txt");
+//	StudentTreeInfo *studtree = new StudentTreeInfo("TestLeftRight.txt");
 //	cout << "************************************" << endl;
 
 /*********End of Part 5 ***********************/
@@ -60,24 +60,25 @@ int main() {
 
 //	cout <<endl<<endl<< "********* Testing Removing ************" << endl;
 //
-//	/***** Removing student with no kids *******/
+//	//***** Removing student with no kids *******/
 //	cout << "Removing No Children (Arachnea Adams)"<<endl;
 //	studtree->tree->remove("Adams","Arachnea");
 //	studtree->tree->printTreeIO();
 //	cout << "************************************" << endl;
 //
-
-	///***** Removing student with one kid *******/
-//		cout << "Removing Node with One Kid (Fabian Fearful)"<<endl;
-//		studtree->tree->remove("Fearful","Fabian");
-//		studtree->tree->printTreeIO();
-//		cout << "************************************" << endl;
-
-///***** Removing student with two kids *******/
-//		cout << "Removing Node with two kids (Jason Jinx)"<<endl;
-//		studtree->tree->remove("Jinx","Jason");
-//		studtree->tree->printTreeIO();
-//		cout << "************************************" << endl;
+//
+//	//***** Removing student with one kid *******/
+//	cout << "Removing Node with One Kid (Fabian Fearful)"<<endl;
+//	studtree->tree->remove("Fearful","Fabian");
+//	studtree->tree->printTreeIO();
+//	cout << "************************************" << endl;
+//
+//	//***** Removing student with two kids *******/
+//	cout << "Removing Node with two kids (Jason Jinx)"<<endl;
+//	studtree->tree->remove("Jinx","Jason");
+//	studtree->tree->printTreeIO();
+//	cout << "************************************" << endl;
+//
 //	cout << "Ready to Delete?"<< endl;
 //	string ans;
 //	cin >> ans;

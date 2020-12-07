@@ -16,8 +16,8 @@ BST::BST() {
 	root = NULL;
 }
 
-BST::BST(string s) {
-	root = new TNode(s);
+BST::BST(string sarr[]) {
+	root = new TNode(sarr);
 }
 
 void BST::printTreeIO() {
@@ -78,10 +78,10 @@ void BST::clearTree(TNode *tmp) {
 	}
 }
 
-bool BST::insert(string s){
-	TNode *tmp1 = new TNode(s);
-	if (root != NULL){
-		TNode *tmp2 = root;
+bool BST::insert(string sarr[]){
+	TNode *tmp1 = new TNode(sarr);
+	TNode *tmp2 = root;
+	if (tmp2 != NULL){
 
 		while (tmp2 != NULL){
 			if((tmp1->student->last) > (tmp2->student->last)){
@@ -104,8 +104,28 @@ bool BST::insert(string s){
 				tmp2 = tmp2->left;
 			}
 
-			else if (tmp1->student->last == s){
-				return false;
+			else if (tmp1->student->first == sarr[3]){
+				if (tmp1->student->first < tmp2->student->first) {
+					if (tmp2->left == NULL) {
+						tmp2->left = tmp1;
+						tmp1->parent = tmp2;
+						setHeight(tmp1);
+						return true;
+					}
+					tmp2 = tmp2->left;
+				}
+				else if (tmp1->student->first > (tmp2->student->first)) {
+					if (tmp2->right == NULL) {
+						tmp2->right = tmp1;
+						tmp1->parent = tmp2;
+						setHeight(tmp1);
+						return true;
+					}
+					tmp2 = tmp2->right;
+				}
+				else if (tmp1->student->first == sarr[3]) {
+					return false;
+				}
 			}
 		}
 	}
@@ -118,25 +138,50 @@ bool BST::insert(string s){
 	return false;
 }
 
-TNode * BST::findRec(TNode *root, string s){
-	if (root==NULL){
+TNode *BST::find(string last, string first){
+	TNode *n=root;
+	int counter=0;
+	if(n==NULL){
 		return NULL;
 	}
-
-	else if ((root->student->last).compare(s)==0){
-		return root;
+	else{
+		while(n->student->last !=last){
+			counter++;
+			if(n->student->last < last){
+				n=n->right;
+			}
+			else if(n->student->last >last){
+				n=n->left;
+			}
+			else if(n==NULL){
+				//cout << "Count: " << counter << endl;
+				return NULL;
+			}
+		}
+		if(n->student->last==last && n->student->first==first){
+			cout << "Count: " << counter << endl;
+			return n;
+		}
+		else if(n->student->last==last && n->student->first!=first){
+			if(n->student->first < first){
+				n=n->right;
+				if(n->student->last==last && n->student->first==first){
+					cout << "Count: " << counter << endl;
+					return n;
+				}
+			}
+			else if(n->student->first >first){
+				n=n->left;
+				if(n->student->last==last && n->student->first==first){
+					cout << "Count: " << counter << endl;
+					return n;
+				}
+			}
+		}
 	}
-
-	else if ((root->student->last).compare(s)<0){
-		return findRec(root->right,s);
-	}
-
-		return findRec(root->left,s);
-	}
-
-TNode *BST::find(string s){
-	return findRec(root,s);
-	}
+	//cout << "Count: " << counter << endl;
+	return NULL;
+}
 
 void BST::printTreeIO(TNode *n) {
 	if (n == NULL) {
@@ -173,8 +218,8 @@ void BST::printTreePost(TNode *n){
 		}
 }
 
-TNode *BST::remove(string s){
-	TNode * tmp = find(s);
+TNode *BST::remove(string last,string first){
+	TNode * tmp = find(last,first);
 	        if(tmp->right == NULL && tmp->left == NULL){
 	                return removeNoKids(tmp);
 	        }
@@ -196,7 +241,7 @@ TNode *BST::remove(string s){
 					while(tmp2->right != NULL){
 						tmp2 = tmp2->right;
 					}
-					tmp->student->phrase = tmp2->data->phrase;
+					tmp->student->last = tmp2->student->last;
 
 					if(tmp2->left == NULL){
 						removeNoKids(tmp2);
@@ -207,16 +252,25 @@ TNode *BST::remove(string s){
 					}
 			        return tmp2;
 				}
+	        return NULL;
 }
 
 TNode *BST::removeNoKids(TNode *tmp){
 	    if(tmp->parent->student->last < tmp->student->last){
 	                tmp->parent->right = NULL;
 	        }
-
-	        else{
-	                tmp->parent->left = NULL;
-	        }
+	    else if(tmp->parent->student->last == tmp->student->last) {
+	         if(tmp->parent->student->first <tmp->student->first){
+	               	tmp->parent->right=NULL;
+	               }
+	               else
+	               {
+	               	tmp->parent->left=NULL;
+	               }
+	       }
+	    else{
+	       	tmp->parent->left = NULL;
+	    }
         setHeight(tmp->parent);
 	    return tmp;
 	}
@@ -259,6 +313,26 @@ TNode *BST::removeOneKid(TNode *tmp,bool leftFlag){
 	        return tmp;
 }
 
+void BST::updateHeight(TNode *n){
+	if(n->left!=NULL && n->right!=NULL){
+		if (n->left->height > n->right->height) {
+				n->height = n->left->height + 1;
+		}
+		else {
+				n->height =n->right->height + 1;
+		}
+	}
+	else if (n->left==NULL && n->right!=NULL) {
+		n->height = n->right->height + 1;
+	}
+	else if(n->left!=NULL && n->right==NULL){
+			n->height = n->left->height+1;
+	}
+	else{
+		n->height=1;
+	}
+}
+
 void BST::setHeight(TNode * n){
 	while(n!=root){
 		n=n->parent;
@@ -276,12 +350,113 @@ void BST::setHeight(TNode * n){
 			n->height=1;
 		}
 
-		else if(n->left == NULL){
+		else if(n->left == NULL && n->right!=NULL){
 			n->height = n->right->height+1;
 		}
 
-		else{
+		else if(n->right == NULL && n->left!=NULL){
 			n->height = n->left->height + 1;
 		}
+		if(getBalance(n)>=2 && getBalance(n->left)>=1){				//need to add a few more cases
+			rotateRight(n);
+		}
+		else if(getBalance(n)>=2 && getBalance(n->left)<=-1){
+			rotateLeft(n->left);
+			rotateRight(n);
+		}
+		else if(getBalance(n)<=-2 && getBalance(n->right)<=-1){
+			rotateLeft(n);
+		}
+		else if(getBalance(n)<=-2 && getBalance(n->right)>=1){
+			rotateRight(n->right);
+			rotateLeft(n);
+		}
 	}
+}
+
+int BST::getBalance(TNode *tmp){
+	if(tmp->left!=NULL && tmp->right!=NULL){
+		return((tmp->left->height)-(tmp->right->height));
+	}
+	else if(tmp->left==NULL && tmp->right!=NULL){
+		return(0-(tmp->right->height));
+	}
+	else if(tmp->left!=NULL && tmp->right==NULL){
+			return(tmp->left->height);
+		}
+	return 0;
+}
+
+TNode *BST::rotateLeft(TNode *tmp){
+	TNode *tmp2=tmp->right;
+	TNode *tmp3=tmp2->left;
+	TNode *tpar=tmp->parent;
+
+	tmp2->left=NULL;
+	tmp2->left=tmp;
+	tmp->right=NULL;
+	tmp->right=tmp3;
+	if(tmp==root){  //root case
+		root=tmp2;
+		tmp2->parent=NULL;
+		tmp->parent=NULL;
+		tmp->parent=tmp2;
+		if(tmp3!=NULL){
+			tmp3->parent=tmp;
+		}
+	}
+	else{
+		tmp2->parent=tmp->parent;
+		if(tpar->right==tmp){
+			tpar->right=tmp2;
+		}
+		else{
+			tpar->left=tmp2;
+		}
+		tmp->parent=NULL;
+		tmp->parent=tmp2;
+		if(tmp3!=NULL){
+			tmp3->parent=tmp;
+				}
+	}
+	updateHeight(tmp);
+	updateHeight(tmp2);
+	return tmp2;
+}
+
+TNode *BST::rotateRight(TNode *tmp){
+	TNode *tmp2=tmp->left;
+	TNode *tmp3=tmp2->right;
+	TNode *tpar=tmp->parent;
+
+	tmp2->right=NULL;
+	tmp2->right=tmp;
+	tmp->left=NULL;
+	tmp->left=tmp3;
+	if(tmp==root){  //root case
+		root=tmp2;
+		tmp2->parent=NULL;
+		tmp->parent=NULL;
+		tmp->parent=tmp2;
+		if(tmp3!=NULL){
+			tmp3->parent=tmp;
+		}
+	}
+	else{
+		tmp2->parent=tmp->parent;
+		if(tpar->right==tmp){
+			tpar->right=tmp2;
+		}
+		else{
+			tpar->left=tmp2;
+		}
+		tmp->parent=NULL;
+		tmp->parent=tmp2;
+		if(tmp3!=NULL){
+			tmp3->parent=tmp;
+				}
+	}
+	updateHeight(tmp);
+	updateHeight(tmp2);
+	return tmp2;
 }
