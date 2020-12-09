@@ -66,7 +66,7 @@ public:
 			// array
 	int calcHash1(string k);  // hash function
 	int calcHash2(string k);  // hash function 2
-	void getClosestPrime();  // I used a binary search and an  
+	int getClosestPrime(int n);  // I used a binary search and an
 			//array of primes to find the closest prime to 
 			//double the map Size, and then set mapSize to 
 			//that new prime - you can find the prime in
@@ -85,6 +85,7 @@ public:
 			//LOOKING FOR THE KEY.  IF YOU DO THAT YOU'RE 
 			// MISSING THE WHOLE ENTIRE POINT OF HASH 
 			// FUNCTIONS!!!!!
+	bool hashMap::isPrime(int n);
 	void printMap();  //I wrote this solely to check if 
 			//everything was working.
 };
