@@ -40,8 +40,8 @@ hashMap::hashMap(bool hash1, bool coll1) {
 void hashMap::addKeyValue(string k, string v) {
 
 
-	while(hashMap[k]!=NULL){
-		if (hashMap[k]==v){
+	while(hashMap[k]!= NULL){
+		if (hashMap[k] == v){
 			*tmp=k
 			while(tmp->next!=NULL){
 			tmp=tmp->next;
@@ -77,7 +77,19 @@ void hashMap::addKeyValue(string k, string v) {
 }
 int hashMap::getIndex(string k) {
 
-	if (){
+
+	int sumNull=0;
+	for (int i=0; i<mapSize; i++){
+		if(mapSize[i]==NULL){
+			sumNull=sumNull+1;
+		}
+	}
+
+	if (sumNull >= (.3*mapSize)){
+		calcHash1(k);
+	}
+	else{
+		reHash();
 	}
 
 }
@@ -130,9 +142,19 @@ int hashMap::getClosestPrime(int n) {
 	return prime;
 }
 void hashMap::reHash() {
-	int newMapSize=mapSize*2;
-	mapSize=getClosestPrime(newMapSize);
 
+
+	int sumNull=0;
+	for (int i=0; i<mapSize; i++){
+		if(mapSize[i]==NULL){
+			sumNull=sumNull+1;
+		}
+	}
+
+	if (sumNull < (.3*mapSize)){
+		int newMapSize=mapSize*2;
+		mapSize=getClosestPrime(newMapSize);
+	}
 	//int newMap[mapSize];
 	//int counter=0;
 	//for (int i=0; i<mapSize;i++){
