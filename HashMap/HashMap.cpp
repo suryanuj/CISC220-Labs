@@ -15,38 +15,30 @@
 using namespace std;
 
 hashMap::hashMap(bool hash1, bool coll1) {
-
-	if (hash1 = true){
-		calcHash1(k);
-	}
-	else {
-		calcHash2(k);
+	map=new hashNode*[251];
+	for( int i=0;i<251;i++){
+		map[i]=NULL;
 	}
 
-
-	if (coll1 = true){
-		coll1(h,i,k);
-	}
-
-	else {
-		coll2(h,i,k);
-	}
-
-//	int mapSize[0];
-//	for (int i=0; i<mapSize;i++){
-//		mapSize[i]=NULL;
-//	}
+	first="";
+	numKeys=0;
+	mapSize=251;
+	hashfn=hash1;
+	collfn=coll1;
+	collisions=0;
+	hashcoll=0;
 }
+
 void hashMap::addKeyValue(string k, string v) {
 
 
-	while(hashMap[k]!= NULL){
-		if (hashMap[k] == v){
+	while(map[k] != NULL){
+		if (map[k] == v){
 			*tmp=k
 			while(tmp->next!=NULL){
 			tmp=tmp->next;
 			}
-			tmp->next=(whatever is being hashed)
+			tmp->next=v;
 		}
 
 		else{
@@ -55,18 +47,18 @@ void hashMap::addKeyValue(string k, string v) {
 
 	}
 
-	if (hashMap[k]==NULL){
-		hashMap[k]=v;
+	if (map[k] == NULL){
+		map[k]=v;
 	}
 
 	int counter=0;
 
 	for (int i=0; i<mapSize; i++){
-		if (hashMap[i]!= NULL) ;
+		if (map[i]!= NULL) ;
 			counter+=1;
 	}
 
-	if (counter>(hashMap*.7)){
+	if (counter>(mapSize*.7)){
 		rehash()
 	}
 }
@@ -80,7 +72,7 @@ int hashMap::getIndex(string k) {
 
 	int sumNull=0;
 	for (int i=0; i<mapSize; i++){
-		if(mapSize[i]==NULL){
+		if(map[i]==NULL){
 			sumNull=sumNull+1;
 		}
 	}
@@ -146,7 +138,7 @@ void hashMap::reHash() {
 
 	int sumNull=0;
 	for (int i=0; i<mapSize; i++){
-		if(mapSize[i]==NULL){
+		if(map[i]==NULL){
 			sumNull=sumNull+1;
 		}
 	}
@@ -163,7 +155,7 @@ void hashMap::reHash() {
 			newmap[i]->next=map[i]->next;
 			newmap->next
 	}*/
-	**map=newMap;
+	**map=mapSize;
 }
 
 
