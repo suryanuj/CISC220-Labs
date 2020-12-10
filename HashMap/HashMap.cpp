@@ -59,14 +59,11 @@ void hashMap::addKeyValue(string k, string v) {
 	}
 
 	if (counter>(mapSize*.7)){
-		rehash()
+		reHash();
 	}
 }
 
 
-
-
-}
 int hashMap::getIndex(string k) {
 
 
@@ -155,27 +152,30 @@ void hashMap::reHash() {
 			newmap[i]->next=map[i]->next;
 			newmap->next
 	}*/
-	**map=mapSize;
+	//**map=mapSize;
 }
 
 
 int hashMap::coll1(int h, int i, string k) {
 
-	while (i != NULL) {
+	while (map[i] != NULL) {
 		int newnum=0;
 		for (int i=0; i<k.length(); i++){
 			newnum=+(int(k[i])+(i^i));
 		}
 		newnum=newnum%mapSize;
 
-		if (newnum == NULL)
-			return i=newnum;
+//		if (newnum == NULL)
+//			return i=newnum;
+//	}
+		if (newnum == 0)
+		return i=newnum;
 	}
 }
 
 
 int hashMap::coll2(int h, int i, string k) {
-	while (i == NULL) {
+	while (map[i] == NULL) {
 		i=i+1;
 
 		if (i>=mapSize){
@@ -186,6 +186,15 @@ int hashMap::coll2(int h, int i, string k) {
 
 int hashMap::findKey(string k) {
 //NOTE: THIS METHOD CANNOT LOOP from index 0 to end of hash array looking for the key.  That destroys any efficiency in run-time. 
+	int hash = calcHash1(k);
+
+	if (map[hash] != NULL){
+		return hash;
+	}
+	else{
+		return -1;
+	}
+
 }
 
 
