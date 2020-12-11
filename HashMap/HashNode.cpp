@@ -51,13 +51,15 @@ void hashNode::dblArray() {
 	//Again, just copying over, no hash functiosn involved 
 	//here.
 	valuesSize=valuesSize*2;
-	int values1[valuesSize];
-	int counter=0;
+
+	string values1[valuesSize];
+	//int counter=0;
 	for (int i=0; i<valuesSize;i++){
 		values1[i]=values[i];
 	}
 	values=values1;
-	delete values1;
+
+	//delete values1;
 }
 
 string hashNode::getRandValue() {

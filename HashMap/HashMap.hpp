@@ -73,9 +73,9 @@ public:
 			//another way if you choose
 	void reHash();  // when size of array is at 70%, double 
 			//array size and rehash keys
-	int coll1(int h, int i, string k);  // a probing method 
+	int coll1(int i, string k);  // a probing method
 			//for collisions (when index is already full)
-	int coll2(int h, int i, string k);  // a different method 
+	int coll2(int i, string k);  // a different method
 			//for dealing with collisions
 	int findKey(string k);  //finds the key in the array and 
 			//returns its index.  If it's not in the
@@ -85,7 +85,7 @@ public:
 			//LOOKING FOR THE KEY.  IF YOU DO THAT YOU'RE 
 			// MISSING THE WHOLE ENTIRE POINT OF HASH 
 			// FUNCTIONS!!!!!
-	bool hashMap::isPrime(int n);
+	bool primeNum(int n);
 	void printMap();  //I wrote this solely to check if 
 			//everything was working.
 };

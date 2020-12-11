@@ -32,54 +32,108 @@ hashMap::hashMap(bool hash1, bool coll1) {
 void hashMap::addKeyValue(string k, string v) {
 
 
-	while(map[k] != NULL){
-		if (map[k] == v){
-			*tmp=k
-			while(tmp->next!=NULL){
-			tmp=tmp->next;
-			}
-			tmp->next=v;
-		}
+	int i = getIndex(k);
 
-		else{
-			hashMap();
-		}
+	if (map[i] == NULL){
 
+		map[i] = new hashNode(k,v);
 	}
-
-	if (map[k] == NULL){
-		map[k]=v;
+	else if (map[i] -> keyword == k){
+		map[i]->addValue(v);
 	}
+	numKeys++;
 
-	int counter=0;
 
-	for (int i=0; i<mapSize; i++){
-		if (map[i]!= NULL) ;
-			counter+=1;
-	}
-
-	if (counter>(mapSize*.7)){
+	if (((float) numKeys / (float) mapSize) >.7)
 		reHash();
-	}
+
+
+//	while(map[k] != NULL){
+//		if (map[k] == v){
+//			*tmp=k
+//			while(tmp->next!=NULL){
+//			tmp=tmp->next;
+//			}
+//			tmp->next=v;
+//		}
+//
+//		else{
+//			hashMap();
+//		}
+//
+//	}
+//
+//	if (map[k] == NULL){
+//		map[k]=v;
+//	}
+//
+//	int counter=0;
+//
+//	for (int i=0; i<mapSize; i++){
+//		if (map[i]!= NULL) ;
+//			counter+=1;
+//	}
+//
+//	if (counter>(mapSize*.7)){
+//		reHash();
+//	}
 }
 
 
 int hashMap::getIndex(string k) {
 
 
-	int sumNull=0;
-	for (int i=0; i<mapSize; i++){
-		if(map[i]==NULL){
-			sumNull=sumNull+1;
+	int i=0;
+
+	if (hashfn == true){
+		i = calcHash1(k);
+		if (map[i] != NULL){
+			if(map[i]->keyword !=k){
+				if (collfn == true){
+					i=coll1(i,k);
+				}
+				else{
+					i=coll2(i,k);
+				}
+			}
+		hashcoll++;
 		}
+		return i;
 	}
 
-	if (sumNull >= (.3*mapSize)){
-		calcHash1(k);
+	else {
+		i=calcHash2(k);
+		if (map[i] != NULL){
+			if(map[i]->keyword !=k){
+				if (collfn == true){
+					i=coll1(i,k);
+				}
+				else{
+					i=coll2(i,k);
+				}
+			}
+		hashcoll++;
+		}
+		return i;
 	}
-	else{
-		reHash();
-	}
+
+
+
+
+
+//	int sumNull=0;
+//	for (int i=0; i<mapSize; i++){
+//		if(map[i]==NULL){
+//			sumNull=sumNull+1;
+//		}
+//	}
+//
+//	if (sumNull >= (.3*mapSize)){
+//		calcHash1(k);
+//	}
+//	else{
+//		reHash();
+//	}
 
 }
 
@@ -87,7 +141,7 @@ int hashMap::calcHash2(string k){
 
 	int sum=0;
 	for (int i=0; i<k.length(); i++){
-		sum=+(int(k[i]));
+		sum+=(int(k[i]));
 	}
 
 	return sum%mapSize;
@@ -97,14 +151,14 @@ int hashMap::calcHash1(string k){
 
 	int sum=0;
 	for (int i=0; i<k.length(); i++){
-		sum=+(int(k[i])*7)+i;
+		sum+=(int(k[i])*7)+i;
 	}
 
 	return sum%mapSize;
 
 
 }
-bool hashMap::isPrime(int n){
+bool hashMap::primeNum(int n){
 	if (n%2 == 0 || n%3 == 0){
 		return false;
 	}
@@ -124,7 +178,7 @@ int hashMap::getClosestPrime(int n) {
 	while (flag) {
 		prime++;
 
-		if (isPrime(prime))
+		if (primeNum(prime))
 			flag = false;
 	}
 
@@ -153,10 +207,11 @@ void hashMap::reHash() {
 			newmap->next
 	}*/
 	//**map=mapSize;
+
 }
 
 
-int hashMap::coll1(int h, int i, string k) {
+int hashMap::coll1(int i, string k) {
 
 	while (map[i] != NULL) {
 		int newnum=0;
@@ -168,13 +223,14 @@ int hashMap::coll1(int h, int i, string k) {
 //		if (newnum == NULL)
 //			return i=newnum;
 //	}
-		if (newnum == 0)
-		return i=newnum;
+		if (newnum == 0){
+			return i=newnum;
+		}
 	}
 }
 
 
-int hashMap::coll2(int h, int i, string k) {
+int hashMap::coll2(int i, string k) {
 	while (map[i] == NULL) {
 		i=i+1;
 
@@ -184,18 +240,18 @@ int hashMap::coll2(int h, int i, string k) {
 	}
 }
 
-int hashMap::findKey(string k) {
-//NOTE: THIS METHOD CANNOT LOOP from index 0 to end of hash array looking for the key.  That destroys any efficiency in run-time. 
-	int hash = calcHash1(k);
-
-	if (map[hash] != NULL){
-		return hash;
-	}
-	else{
-		return -1;
-	}
-
-}
+//int hashMap::findKey(string k) {
+////NOTE: THIS METHOD CANNOT LOOP from index 0 to end of hash array looking for the key.  That destroys any efficiency in run-time.
+//	int hash = calcHash1(k);
+//
+//	if (map[hash] != NULL){
+//		return hash;
+//	}
+//	else{
+//		return -1;
+//	}
+//
+//}
 
 
 void hashMap::printMap() {
